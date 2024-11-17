@@ -1,1 +1,22 @@
-spring.application.name=stockApi
+debug: true
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/portfplannr
+    username: lawe
+    password: lawe1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      platform: postgresql
+      mode: always
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR
+
