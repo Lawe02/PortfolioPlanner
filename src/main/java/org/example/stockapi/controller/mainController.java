@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/stocks")
 public class mainController {
 
     private final StockService stockService;
@@ -20,5 +20,8 @@ public class mainController {
 //        stockService.feedActiveStocksToDb("NAS");
 //        return "§";
 //    }
+
+    @GetMapping
+    public
 
 }

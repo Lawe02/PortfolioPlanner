@@ -22,6 +22,8 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
+
+
     public void feedActiveStocksToDb(String exchange) throws Exception {
         List<Stock> stocks = new ArrayList<>();
         String requestUri = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=M78CIK0T40MEZHNZ";
