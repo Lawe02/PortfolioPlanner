@@ -22,6 +22,9 @@ public class PlanSerivce {
     }
 
     public void CreatePlan(CreatePlanRequestDto createPlanRequestDto) {
+        AppUser user = appUserRepository.findByUsername(createPlanRequestDto.userName());
+
+        Plan plan = new Plan();
 
 
     }

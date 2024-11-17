@@ -12,7 +12,24 @@ public class Plan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private String name;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private String description;
 
     @ManyToOne
