@@ -22,7 +22,9 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-
+    public List<Stock> getStocks() {
+        return stockRepository.findAll();
+    }
 
     public void feedActiveStocksToDb(String exchange) throws Exception {
         List<Stock> stocks = new ArrayList<>();
