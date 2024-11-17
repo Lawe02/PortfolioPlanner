@@ -1,6 +1,7 @@
 package org.example.stockapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.context.annotation.EnableMBeanExport;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Plan {
     private String description;
 
     @ManyToOne
+    @NotNull
     private AppUser user;
     @OneToMany(mappedBy = "plan")
     private List<PlanStock> stocks;
@@ -25,10 +27,6 @@ public class Plan {
 
     public void setOwner(AppUser user) {
         this.user = user;
-    }
-
-    public void setId(Long id) {
-        this.Id = id;
     }
 
     public Long getId() {
