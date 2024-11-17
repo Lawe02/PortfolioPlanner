@@ -22,9 +22,16 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    public List<Stock> getStocks() {
+    public List<Stock> getStocks() throws Exception {
+        // Check if the database is empty
+        if (stockRepository.count() == 0) {
+            // If empty, populate the database
+            feedActiveStocksToDb("NASDAQ"); // Or any default exchange you prefer
+        }
+        // Return all stocks from the database
         return stockRepository.findAll();
     }
+
 
     public void feedActiveStocksToDb(String exchange) throws Exception {
         List<Stock> stocks = new ArrayList<>();
