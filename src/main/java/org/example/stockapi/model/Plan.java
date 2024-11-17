@@ -35,6 +35,15 @@ public class Plan {
     @ManyToOne
     @NotNull
     private AppUser user;
+
+    public List<PlanStock> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(List<PlanStock> stocks) {
+        this.stocks = stocks;
+    }
+
     @OneToMany(mappedBy = "plan")
     private List<PlanStock> stocks;
 

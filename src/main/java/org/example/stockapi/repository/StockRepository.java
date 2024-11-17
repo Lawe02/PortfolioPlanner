@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StockRepository extends ListCrudRepository<Stock, String> {
+    Stock findBySymbol(String s);
 }

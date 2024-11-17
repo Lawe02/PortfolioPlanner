@@ -12,17 +12,43 @@ public class PlanStock {
     private int priceWhenAdded;
     private double moneyInvested;
 
+    public int getPriceWhenAdded() {
+        return priceWhenAdded;
+    }
+
+    public void setPriceWhenAdded(int priceWhenAdded) {
+        this.priceWhenAdded = priceWhenAdded;
+    }
+
+    public int getMonthlyPercentageDevelopment() {
+        return monthlyPercentageDevelopment;
+    }
+
+    public void setMonthlyPercentageDevelopment(int monthlyPercentageDevelopment) {
+        this.monthlyPercentageDevelopment = monthlyPercentageDevelopment;
+    }
+
+    public double getMoneyInvested() {
+        return moneyInvested;
+    }
+
+    public void setMoneyInvested(double moneyInvested) {
+        this.moneyInvested = moneyInvested;
+    }
+
     @ManyToOne
     private Plan plan;
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
+
     @OneToOne
     @JoinColumn(name = "symbol", referencedColumnName = "id") // Foreign key to Stock
     private Stock stock;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }
