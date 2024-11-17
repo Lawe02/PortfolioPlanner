@@ -2,6 +2,8 @@ package org.example.stockapi.service;
 
 import org.example.stockapi.model.Stock;
 import org.example.stockapi.repository.StockRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
