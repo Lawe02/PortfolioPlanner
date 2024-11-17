@@ -1,5 +1,6 @@
 package org.example.stockapi.service;
 
+import org.example.stockapi.model.AppUser;
 import org.example.stockapi.repository.AppUserRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +12,9 @@ public class AppUserService {
     public AppUserService(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
     }
+
+    public AppUser getAppUserByUsername(String username) {
+        return appUserRepository.findByUsername(username);
+    }
+
 }
