@@ -1,12 +1,15 @@
 package org.example.stockapi.controller;
 
+import jakarta.validation.Valid;
+import org.example.stockapi.Dto.req.CreatePlanRequestDto;
 import org.example.stockapi.Dto.resp.StockResponseDto;
+import org.example.stockapi.model.Plan;
 import org.example.stockapi.model.Stock;
+import org.example.stockapi.service.PlanSerivce;
 import org.example.stockapi.service.StockService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +19,11 @@ import java.util.List;
 public class mainController {
 
     private final StockService stockService;
+    private final PlanSerivce planSerivce;
 
-    public mainController(StockService stockService) {
+    public mainController(StockService stockService, PlanSerivce planSerivce) {
         this.stockService = stockService;
+        this.planSerivce = planSerivce;
     }
     @GetMapping
     public ResponseEntity<List<StockResponseDto>> getAllStocks()  {
@@ -34,6 +39,12 @@ public class mainController {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createPlan(@RequestBody @Valid CreatePlanRequestDto createPlanRequestDto) {
+        planSerivce.CreatePlan(createPlanRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("createdPlan");
     }
 
 }
