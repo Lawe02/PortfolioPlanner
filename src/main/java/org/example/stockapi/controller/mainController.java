@@ -3,6 +3,7 @@ package org.example.stockapi.controller;
 import jakarta.validation.Valid;
 import org.example.stockapi.Dto.req.CreatePlanRequestDto;
 import org.example.stockapi.Dto.resp.StockResponseDto;
+import org.example.stockapi.model.Plan;
 import org.example.stockapi.model.Stock;
 import org.example.stockapi.service.PlanSerivce;
 import org.example.stockapi.service.StockService;
@@ -44,4 +45,12 @@ public class mainController {
         planSerivce.CreatePlan(createPlanRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("createdPlan");
     }
+
+    @GetMapping("/plans")
+    public ResponseEntity<List<Plan>> getPlansForUser(@RequestParam String userName){
+        List<Plan> plans = planSerivce.getPlansForUser(userName);
+        return ResponseEntity.ok(plans);
+    }
+
+
 }

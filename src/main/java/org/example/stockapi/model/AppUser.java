@@ -24,6 +24,10 @@ public class AppUser {
     @OneToMany(mappedBy = "user")
     private List<Plan> plans;
 
+    public List<Plan> getPlans() {
+        return plans;
+    }
+
     public Long getId() {
         return id;
     }

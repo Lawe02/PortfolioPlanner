@@ -49,4 +49,10 @@ public class PlanSerivce {
         plan.setStocks(planStocks);
         planRepository.save(plan);
     }
+
+    public List<Plan> getPlansForUser(String username) {
+        AppUser user = appUserRepository.findByUsername(username);
+
+        return user.getPlans();
+    }
 }
