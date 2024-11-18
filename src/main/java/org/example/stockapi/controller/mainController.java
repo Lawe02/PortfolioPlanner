@@ -27,6 +27,7 @@ public class mainController {
         this.stockService = stockService;
         this.planSerivce = planSerivce;
     }
+
     @GetMapping
     public ResponseEntity<List<StockResponseDto>> getAllStocks()  {
         try {
@@ -45,6 +46,18 @@ public class mainController {
 
     @GetMapping("/search")
     public ResponseEntity<List<StockResponseDto>> getAllStocksByName(@RequestParam String name, @RequestParam int page)  {
+        try {
+            List<Stock> stocks = stockService.getStocks(page,name);
+            List<StockResponseDto> stockResponseDtos = stocks
+                    .stream()
+                    .map(stock -> new StockResponseDto(stock.getSymbol(), stock.getName()))
+                    .toList();
+
+            return ResponseEntity.ok(stockResponseDtos);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @PostMapping

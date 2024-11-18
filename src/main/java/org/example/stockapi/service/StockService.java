@@ -32,6 +32,29 @@ public class StockService {
         return stockRepository.findAll();
     }
 
+    public List<Stock> getStocks(int page, String query) throws Exception {
+        if (stockRepository.count() == 0) {
+            feedActiveStocksToDb("NASDAQ");
+        }
+
+        List<Stock> allStocks = stockRepository.findAll();
+
+        if(query != null && !query.isEmpty()) {
+            allStocks = allStocks.stream()
+                    .filter(stock ->
+                            stock.getName()
+                            .contains(query)
+                                    ||
+                            stock.getSymbol()
+                            .contains(query))
+                    .toList();
+        }
+
+        int start = Math.min(page * 10, allStocks.size());
+        int end = Math.min(start + 10, allStocks.size());
+
+        return allStocks.subList(start, end);
+    }
 
     public void feedActiveStocksToDb(String exchange) throws Exception {
         List<Stock> stocks = new ArrayList<>();
