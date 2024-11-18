@@ -11,6 +11,16 @@ public class PlanStock {
     private int monthlyPercentageDevelopment;
     private int priceWhenAdded;
     private double moneyInvested;
+    @ManyToOne
+    private Stock stock;
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
 
     public int getPriceWhenAdded() {
         return priceWhenAdded;

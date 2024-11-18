@@ -1,4 +1,6 @@
 package org.example.stockapi.Dto.resp;
 
-public record PlanResponseDto(String name, String description) {
+import java.util.List;
+
+public record PlanResponseDto(String name, String description, List<StockPlanResponseDto> stockPlans) {
 }

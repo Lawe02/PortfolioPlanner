@@ -38,6 +38,7 @@ public class PlanSerivce {
                     Stock stock = stockRepository.findBySymbol(stockPlanDto.stockSymbol());
 
                     PlanStock planStock = new PlanStock();
+                    planStock.setStock(stock);
                     planStock.setMoneyInvested(stockPlanDto.moneyInvested());
                     planStock.setMonthlyPercentageDevelopment(stockPlanDto.monthlyPercentageProgress());
                     planStock.setPriceWhenAdded(stockPlanDto.priceWhenAdded());
@@ -52,7 +53,6 @@ public class PlanSerivce {
 
     public List<Plan> getPlansForUser(String username) {
         AppUser user = appUserRepository.findByUsername(username);
-
         return user.getPlans();
     }
 }

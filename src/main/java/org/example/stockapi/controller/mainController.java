@@ -2,7 +2,10 @@ package org.example.stockapi.controller;
 
 import jakarta.validation.Valid;
 import org.example.stockapi.Dto.req.CreatePlanRequestDto;
+import org.example.stockapi.Dto.resp.PlanResponseDto;
+import org.example.stockapi.Dto.resp.StockPlanResponseDto;
 import org.example.stockapi.Dto.resp.StockResponseDto;
+import org.example.stockapi.Dto.resp.UserPlansResponseDto;
 import org.example.stockapi.model.Plan;
 import org.example.stockapi.model.Stock;
 import org.example.stockapi.service.PlanSerivce;
@@ -47,9 +50,32 @@ public class mainController {
     }
 
     @GetMapping("/plans")
-    public ResponseEntity<List<Plan>> getPlansForUser(@RequestParam String userName){
+    public ResponseEntity<UserPlansResponseDto> getPlansForUser(@RequestParam String userName) {
+        // Fetch plans for the given user from the service
         List<Plan> plans = planSerivce.getPlansForUser(userName);
-        return ResponseEntity.ok(plans);
+
+        // Map the fetched plans to PlanResponseDto objects
+        List<PlanResponseDto> listResponseDto = plans.stream()
+                .map(plan -> new PlanResponseDto(
+                        plan.getName(),
+                        plan.getDescription(),
+                        plan.getStocks().stream() // Assuming Plan has a List<Stock> called stocks
+                                .map(stock -> new StockPlanResponseDto(
+                                        stock.getStock().getSymbol(),
+                                        stock.getStock().getName(),
+                                        stock.getMonthlyPercentageDevelopment(),
+                                        stock.getPriceWhenAdded(),
+                                        stock.getMoneyInvested()
+                                ))
+                                .toList()
+                ))
+                .toList();
+
+        // Wrap the list of PlanResponseDto objects in a UserPlansResponseDto
+        UserPlansResponseDto responseDto = new UserPlansResponseDto(listResponseDto);
+
+        // Return the response
+        return ResponseEntity.ok(responseDto);
     }
 
 
