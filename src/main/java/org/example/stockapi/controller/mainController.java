@@ -43,6 +43,10 @@ public class mainController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<StockResponseDto>> getAllStocksByName(@RequestParam String name, @RequestParam int page)  {
+    }
+
     @PostMapping
     public ResponseEntity<String> createPlan(@RequestBody @Valid CreatePlanRequestDto createPlanRequestDto) {
         planSerivce.CreatePlan(createPlanRequestDto);
