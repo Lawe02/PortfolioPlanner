@@ -38,11 +38,10 @@ public class PlanSerivce {
                     Stock stock = stockRepository.findBySymbol(stockPlanDto.stockSymbol());
 
                     PlanStock planStock = new PlanStock();
-                    planStock.setStock(stock);
                     planStock.setMoneyInvested(stockPlanDto.moneyInvested());
                     planStock.setMonthlyPercentageDevelopment(stockPlanDto.monthlyPercentageProgress());
                     planStock.setPriceWhenAdded(stockPlanDto.priceWhenAdded());
-
+                    plan.addPlanStock(planStock);
                     return planStock;
                 })
                 .toList();

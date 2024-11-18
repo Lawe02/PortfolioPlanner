@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.context.annotation.EnableMBeanExport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -44,8 +45,8 @@ public class Plan {
         this.stocks = stocks;
     }
 
-    @OneToMany(mappedBy = "plan")
-    private List<PlanStock> stocks;
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlanStock> stocks = new ArrayList<>();
 
     public AppUser getOwner() {
         return user;
@@ -57,5 +58,10 @@ public class Plan {
 
     public Long getId() {
         return Id;
+    }
+
+    public void addPlanStock(PlanStock planStock) {
+        this.stocks.add(planStock);
+        planStock.setPlan(this);
     }
 }

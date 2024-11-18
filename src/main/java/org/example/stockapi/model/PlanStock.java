@@ -36,19 +36,17 @@ public class PlanStock {
         this.moneyInvested = moneyInvested;
     }
 
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
+
     @ManyToOne
     private Plan plan;
 
-    public Stock getStock() {
-        return stock;
-    }
 
-    public void setStock(Stock stock) {
-        this.stock = stock;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "symbol", referencedColumnName = "id") // Foreign key to Stock
-    private Stock stock;
 
 }
