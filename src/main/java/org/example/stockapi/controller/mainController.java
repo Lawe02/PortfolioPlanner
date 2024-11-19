@@ -76,7 +76,7 @@ public class mainController {
                 .map(plan -> new PlanResponseDto(
                         plan.getName(),
                         plan.getDescription(),
-                        plan.getStocks().stream() // Assuming Plan has a List<Stock> called stocks
+                        plan.getStocks().stream()
                                 .map(stock -> new StockPlanResponseDto(
                                         stock.getStock().getSymbol(),
                                         stock.getStock().getName(),
