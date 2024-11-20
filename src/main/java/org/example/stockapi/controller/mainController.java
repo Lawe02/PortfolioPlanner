@@ -1,6 +1,7 @@
 package org.example.stockapi.controller;
 
 import jakarta.validation.Valid;
+import org.apache.coyote.Request;
 import org.example.stockapi.Dto.req.CreatePlanRequestDto;
 import org.example.stockapi.Dto.resp.PlanResponseDto;
 import org.example.stockapi.Dto.resp.StockPlanResponseDto;
@@ -26,6 +27,21 @@ public class mainController {
     public mainController(StockService stockService, PlanSerivce planSerivce) {
         this.stockService = stockService;
         this.planSerivce = planSerivce;
+    }
+    @GetMapping("/plans/{planId}")
+    public ResponseEntity<PlanResponseDto> getPlan(@PathVariable String planId, @RequestParam String userName) {
+        Plan plan = planSerivce.getPlan(planId, userName);
+        List<StockPlanResponseDto> stockPlanResponseDto = plan.getStocks()
+                .stream()
+                .map(stock -> new StockPlanResponseDto(
+                        stock.getStock().getName(),
+                        stock.getStock().getSymbol(),
+                        stock.getMonthlyPercentageDevelopment(),
+                        stock.getPriceWhenAdded(),
+                        stock.getMoneyInvested()
+                )).toList();
+        PlanResponseDto result = new PlanResponseDto(plan.getName(), plan.getDescription(), stockPlanResponseDto);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping

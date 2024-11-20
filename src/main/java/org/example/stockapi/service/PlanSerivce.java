@@ -55,4 +55,10 @@ public class PlanSerivce {
         AppUser user = appUserRepository.findByUsername(username);
         return user.getPlans();
     }
+
+    public Plan getPlan(String planId, String username) {
+        AppUser user = appUserRepository.findByUsername(username);
+
+        return user.getPlans().stream().filter(plan -> plan.getId().equals(planId)).findFirst().orElse(null);
+    }
 }
