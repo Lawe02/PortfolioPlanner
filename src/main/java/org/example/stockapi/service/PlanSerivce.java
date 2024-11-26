@@ -11,6 +11,7 @@ import org.example.stockapi.repository.StockRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlanSerivce {
@@ -59,6 +60,6 @@ public class PlanSerivce {
     public Plan getPlan(String planId, String username) {
         AppUser user = appUserRepository.findByUsername(username);
 
-        return user.getPlans().stream().filter(plan -> plan.getId().equals(planId)).findFirst().orElse(null);
+        return user.getPlanById(Long.parseLong(planId));
     }
 }

@@ -28,6 +28,15 @@ public class AppUser {
         return plans;
     }
 
+    public Plan getPlanById(Long id) {
+        for (Plan plan : plans) {
+            if (plan.getId().equals(id)) {
+                return plan;
+            }
+        }
+        return null;
+    }
+
     public Long getId() {
         return id;
     }
