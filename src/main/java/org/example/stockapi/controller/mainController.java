@@ -40,7 +40,7 @@ public class mainController {
                         stock.getPriceWhenAdded(),
                         stock.getMoneyInvested()
                 )).toList();
-        PlanResponseDto result = new PlanResponseDto(plan.getName(), plan.getDescription(), stockPlanResponseDto);
+        PlanResponseDto result = new PlanResponseDto(String.valueOf(plan.getId()), plan.getName(), plan.getDescription(), stockPlanResponseDto);
         return ResponseEntity.ok(result);
     }
 
@@ -90,6 +90,7 @@ public class mainController {
         // Map the fetched plans to PlanResponseDto objects
         List<PlanResponseDto> listResponseDto = plans.stream()
                 .map(plan -> new PlanResponseDto(
+                        String.valueOf(plan.getId()),
                         plan.getName(),
                         plan.getDescription(),
                         plan.getStocks().stream()
