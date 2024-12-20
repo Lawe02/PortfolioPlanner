@@ -19,11 +19,13 @@ public class PlanSerivce {
     private final PlanRepository planRepository;
     private final AppUserRepository appUserRepository;
     private final StockRepository stockRepository;
+    private final AppUserService appUserService;
 
-    public PlanSerivce(PlanRepository planRepository, AppUserRepository appUserRepository, StockRepository stockRepository) {
+    public PlanSerivce(PlanRepository planRepository, AppUserRepository appUserRepository, StockRepository stockRepository, AppUserService appUserService) {
         this.planRepository = planRepository;
         this.appUserRepository = appUserRepository;
         this.stockRepository = stockRepository;
+        this.appUserService = appUserService;
     }
 
     public void CreatePlan(CreatePlanRequestDto createPlanRequestDto) {
@@ -54,7 +56,13 @@ public class PlanSerivce {
 
     public List<Plan> getPlansForUser(String username) {
         AppUser user = appUserRepository.findByUsername(username);
-        return user.getPlans();
+        if(user == null) {
+            AppUser newUser = appUserService.createAppUserWithUsername(username);
+            return newUser.getPlans();
+        }
+        else {
+            return user.getPlans();
+        }
     }
 
     public Plan getPlan(String planId, String username) {

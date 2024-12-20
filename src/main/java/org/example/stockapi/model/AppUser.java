@@ -16,7 +16,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String Email;
+    private String email;
     private String firstName;
     private String lastName;
     private String username;
@@ -35,6 +35,20 @@ public class AppUser {
             }
         }
         return null;
+    }
+
+    public AppUser() {}
+
+    public AppUser(String userName) {
+        this.username = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Long getId() {

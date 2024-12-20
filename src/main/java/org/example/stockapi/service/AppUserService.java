@@ -17,7 +17,8 @@ public class AppUserService {
         return appUserRepository.findByUsername(username);
     }
 
-    public void CreateAppUser(AppUser appUser) {
-        appUserRepository.save(appUser);
+    public AppUser createAppUserWithUsername(String username) {
+        AppUser appUser = new AppUser(username);
+        return appUserRepository.save(appUser);
     }
 }

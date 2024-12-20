@@ -30,7 +30,7 @@ public class mainController {
     }
     @GetMapping("/plans/{planId}")
     public ResponseEntity<PlanResponseDto> getPlan(@PathVariable String planId, @RequestParam String userName) {
-        Plan plan = planSerivce.getPlan(planId, userName);
+         Plan plan = planSerivce.getPlan(planId, userName);
         List<StockPlanResponseDto> stockPlanResponseDto = plan.getStocks()
                 .stream()
                 .map(stock -> new StockPlanResponseDto(
@@ -87,6 +87,9 @@ public class mainController {
         // Fetch plans for the given user from the service
         List<Plan> plans = planSerivce.getPlansForUser(userName);
 
+        if(plans == null) {
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        }
         // Map the fetched plans to PlanResponseDto objects
         List<PlanResponseDto> listResponseDto = plans.stream()
                 .map(plan -> new PlanResponseDto(
@@ -110,6 +113,11 @@ public class mainController {
 
         // Return the response
         return ResponseEntity.ok(responseDto);
+    }
+
+    @PostMapping("/test")
+    public ResponseEntity<String> createTestPlan(@RequestBody String str) {
+        return ResponseEntity.status(HttpStatus.CREATED).body("test");
     }
 
 

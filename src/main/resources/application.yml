@@ -13,10 +13,17 @@ spring:
     init:
       platform: postgresql
       mode: always
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-261izk5pkr87u40h.us.auth0.com/
 logging:
   level:
     org:
       springframework:
+        security: TRACE
         boot:
           autoconfigure: ERROR
+
 
