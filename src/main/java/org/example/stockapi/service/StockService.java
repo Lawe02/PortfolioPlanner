@@ -17,18 +17,16 @@ import java.util.List;
 public class StockService {
 
     private final StockRepository stockRepository;
+    private final String APIURL = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=M78CIK0T40MEZHNZ";
 
     public StockService(StockRepository stockRepository) {
         this.stockRepository = stockRepository;
     }
 
     public List<Stock> getStocks() throws Exception {
-        // Check if the database is empty
         if (stockRepository.count() == 0) {
-            // If empty, populate the database
-            feedActiveStocksToDb("NASDAQ"); // Or any default exchange you prefer
+            feedActiveStocksToDb("NASDAQ");
         }
-        // Return all stocks from the database
         return stockRepository.findAll();
     }
 
@@ -58,12 +56,11 @@ public class StockService {
 
     public void feedActiveStocksToDb(String exchange) throws Exception {
         List<Stock> stocks = new ArrayList<>();
-        String requestUri = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=M78CIK0T40MEZHNZ";
 
         HttpClient httpClient = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(requestUri))
+                .uri(URI.create(APIURL))
                 .GET()
                 .build();
 
