@@ -70,4 +70,8 @@ public class PlanSerivce {
 
         return user.getPlanById(Long.parseLong(planId));
     }
+
+    public void deletePlan(String planId) {
+
+    }
 }

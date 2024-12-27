@@ -66,7 +66,7 @@ public class StockService {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() == 200) { // HTTP OK
+        if (response.statusCode() == 200) {
             String body = response.body();
             String[] lines = body.split("\n");
 
