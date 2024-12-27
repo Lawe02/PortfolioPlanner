@@ -21,7 +21,12 @@ public class PlanSerivce {
     private final StockRepository stockRepository;
     private final AppUserService appUserService;
 
-    public PlanSerivce(PlanRepository planRepository, AppUserRepository appUserRepository, StockRepository stockRepository, AppUserService appUserService) {
+    public PlanSerivce(
+            PlanRepository planRepository,
+            AppUserRepository appUserRepository,
+            StockRepository stockRepository,
+            AppUserService appUserService
+    ) {
         this.planRepository = planRepository;
         this.appUserRepository = appUserRepository;
         this.stockRepository = stockRepository;
@@ -67,11 +72,11 @@ public class PlanSerivce {
 
     public Plan getPlan(String planId, String username) {
         AppUser user = appUserRepository.findByUsername(username);
-
         return user.getPlanById(Long.parseLong(planId));
     }
 
-    public void deletePlan(String planId) {
-
+    public void deletePlan(String planId, String userName) {
+        AppUser user = appUserRepository.findByUsername(userName);
+        user.getPlans().remove(Long.parseLong(planId));
     }
 }
