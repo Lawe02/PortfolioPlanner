@@ -115,9 +115,11 @@ public class mainController {
         return ResponseEntity.ok(responseDto);
     }
 
-    @PostMapping("/test")
-    public ResponseEntity<String> createTestPlan(@RequestBody String str) {
-        return ResponseEntity.status(HttpStatus.CREATED).body("test");
+    @DeleteMapping("/plans/delete")
+    public ResponseEntity<String> deleteTestPlan(@RequestParam String planId, @RequestParam String userName) {
+        planSerivce.deletePlan(planId, userName);
+
+        return ResponseEntity.status(HttpStatus.OK).body("deletedPlan");
     }
 
 

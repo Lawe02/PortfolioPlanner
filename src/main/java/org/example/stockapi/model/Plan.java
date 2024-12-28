@@ -45,7 +45,7 @@ public class Plan {
         this.stocks = stocks;
     }
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
     private List<PlanStock> stocks = new ArrayList<>();
 
     public AppUser getOwner() {

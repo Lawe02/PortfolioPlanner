@@ -77,6 +77,7 @@ public class PlanSerivce {
 
     public void deletePlan(String planId, String userName) {
         AppUser user = appUserRepository.findByUsername(userName);
-        user.getPlans().remove(Long.parseLong(planId));
+        user.removePlan(Long.parseLong(planId));
+        appUserRepository.save(user);
     }
 }

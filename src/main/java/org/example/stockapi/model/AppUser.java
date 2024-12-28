@@ -1,9 +1,6 @@
 package org.example.stockapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 
@@ -21,7 +18,7 @@ public class AppUser {
     private String lastName;
     private String username;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Plan> plans;
 
     public List<Plan> getPlans() {
@@ -35,6 +32,10 @@ public class AppUser {
             }
         }
         return null;
+    }
+
+    public void removePlan(Long id) {
+        this.plans.remove(getPlanById(id));
     }
 
     public AppUser() {}
